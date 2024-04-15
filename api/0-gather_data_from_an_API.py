@@ -18,21 +18,23 @@ def do_request():
     if response.status_code != 200:
         return print("Error with code", response.status_code)
     user = response.json()
+    print(user)
 
     response = requests.get(base_url + 'todos/')
     if response.status_code != 200:
         return print("Error", response.status_code)
     todos = response.json()
 
-    user_todos = []
-    for todo in todos:
-        if todo.get('userId') == user.get('id'):
-            user_todos.append(todo)
-
+    user_todos = [todo for todo in todos if todo.get('userId') == user.get('id')]
     completed = [todo for todo in user_todos if todo.get('completed')]
+    
+    total_tasks = len(user_todos)
+    done_tasks = len(completed)
 
+    print(f"Employee {user['name']} is done with tasks ({done_tasks}/{total_tasks}):")
     for task in completed:
-        print(task)
+        print("\t", task)
 
-    if __name__ == "__main__":
-        do_request()
+
+if __name__ == "__main__":
+    do_request()
