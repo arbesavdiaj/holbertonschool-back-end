@@ -25,6 +25,7 @@ if __name__ == "__main__":
     comp_tasks = [comp for comp in user_todos if comp['completed'] is True]
     comp_title = [title['title'] for title in comp_tasks]
 
-    print(f"Employee {user_name} is done with tasks({len(comp_tasks)}/{nr_tasks}):")
+    print(f"Employee {user_name} is done", end="")
+    print(f" with tasks({len(comp_tasks)}/{nr_tasks}):")
     for title in comp_title:
-        print("\t" + "S".join(title.split()))
+        print(f"\t {title}")
