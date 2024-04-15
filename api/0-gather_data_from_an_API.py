@@ -18,7 +18,7 @@ if __name__ == "__main__":
     user_name = data['name']
 
     data = requests.get(f"{URL}todos")
-    
+
     all_todos = data.json()
     user_todos = [todo for todo in all_todos if todo['userId'] == int(argv[1])]
     nr_tasks = len(user_todos)
